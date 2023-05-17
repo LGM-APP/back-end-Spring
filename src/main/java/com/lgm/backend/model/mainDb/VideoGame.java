@@ -14,8 +14,6 @@ import lombok.ToString;
 @Table(name = "videogame")
 public class VideoGame {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
