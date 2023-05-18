@@ -30,7 +30,7 @@ jobs:
       env:
         PRIVATE_KEY: ${{ secrets.SSHKEY  }}
     - name: Run project
-      run: echo "$PRIVATE_KEY" > private_key && chmod 600 private_key ssh -i StrictHostKeyChecking=no private_key ec2-user@ec2-13-50-99-27.eu-north-1.compute.amazonaws.com "cd /home/ec2-user/actions-runner/_work/back-end-Spring/back-end-Spring && java -jar target/Back-End-0.0.1.jar"
+      run: echo "$PRIVATE_KEY" > private_key && chmod 600 private_key ssh -i private_key ec2-user@ec2-13-50-99-27.eu-north-1.compute.amazonaws.com "cd /home/ec2-user/actions-runner/_work/back-end-Spring/back-end-Spring && java -jar target/Back-End-0.0.1.jar"
 
 
     - name: Update dependency graph
