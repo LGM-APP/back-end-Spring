@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.lgm</groupId>
     <artifactId>Back-End</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>Back-End</name>
     <description>Back-End</description>
     <properties>
@@ -90,6 +90,15 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
+                <configuration>
+                    <warSourceDirectory>src/main/webapp</warSourceDirectory>
                 </configuration>
             </plugin>
         </plugins>
