@@ -30,7 +30,7 @@ jobs:
       env:
         PRIVATE_KEY: ${{ secrets.SSHKEY  }}
     - name: Run project
-      run: java -jar /home/ec2-user/actions-runner/_work/back-end-Spring/back-end-Spring/target/Back-End-0.0.1.jar
+      run: nohup java -jar /home/ec2-user/actions-runner/_work/back-end-Spring/back-end-Spring/target/Back-End-0.0.1.jar > output.log &
 
 
     - name: Update dependency graph
