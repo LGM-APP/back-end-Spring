@@ -1,0 +1,18 @@
+name: deploiment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v2
+
+      - name: Effectuer une requête HTTP
+        run: |
+          curl -X POST http://16.16.127.64:6969/webhook
