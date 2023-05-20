@@ -23,7 +23,7 @@ public class Serie {
 
     @ManyToOne
     @JoinColumn(name = "league_id")
-    private League league;
+    private League leagueId;
 
     @Column(name = "full_name")
     private String fullName;

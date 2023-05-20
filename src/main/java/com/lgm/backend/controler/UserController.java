@@ -20,6 +20,11 @@ public class UserController {
 
     private final UserService userService;
 
+    @RequestMapping(value="/test", method=RequestMethod.GET, produces="application/json")
+    @ResponseBody
+    public Iterable<User> test(){
+        return userService.getUser();
+    }
 
     @RequestMapping(value="/register", method=RequestMethod.POST, produces="application/json")
     @ResponseBody
@@ -29,11 +34,7 @@ public class UserController {
 
 
 
-    @RequestMapping(value="/test", method=RequestMethod.GET, produces="application/json")
-    @ResponseBody
-    public Iterable<User> test(){
-        return userService.getUser();
-    }
+
 
 
 
