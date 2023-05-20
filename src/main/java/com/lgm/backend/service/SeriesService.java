@@ -9,6 +9,7 @@ import com.lgm.backend.repository.mainDb.VideoGameRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -23,21 +24,23 @@ public class SeriesService {
 
     public Iterable<Serie> getSeriesByVideoGame(String name){
 
-        Optional<VideoGame> videoGame = videoGameRepository.findByName(name);
 
+     //   Optional<VideoGame> videoGame = videoGameRepository.findByName(name);
+     //
+     //   System.out.println(LocalTime.now());
+     //
+     //   Iterable<League> leagueIterable = leagueRepository.findAllByVideogame(videoGame.orElse(null));
+     //
+     //   System.out.println(LocalTime.now());
+     //
+     //   Iterable<Serie> series = serieRepository.findAllByLeagueIdIn(leagueIterable);
+     //
+     //
+     //   return series;
 
-        Iterable<League> leagueIterable = leagueRepository.findAllByVideogame(videoGame.orElse(null));
-
-
-        List<Serie> series= new ArrayList<>();
-
-
-        leagueIterable.forEach(league -> {
-            series.addAll(serieRepository.findAllByLeagueId(league));
-        });
+        Iterable<Serie> series = serieRepository.findAllByVideoGameName(name);
 
         return series;
-
 
     }
 
