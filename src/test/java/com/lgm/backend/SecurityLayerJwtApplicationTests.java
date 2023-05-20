@@ -23,13 +23,8 @@ class SecurityLayerJwtApplicationTests {
     @Test
     void contextLoads() {
 
-        Point point = new Point();
 
-        Optional<User> user = userRepository.findByEmail("admin@gmail.com");
 
-        point.setUser(user.get());
-
-        pointRepository.save(point);
 
 
 
