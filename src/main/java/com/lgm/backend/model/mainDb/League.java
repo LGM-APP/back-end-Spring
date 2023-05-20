@@ -25,6 +25,6 @@ public class League {
 
     @ManyToOne
     @JoinColumn(name = "videogame_id")
-    private VideoGame videogameId;
+    private VideoGame videogame;
 
 }

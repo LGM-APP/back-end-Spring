@@ -9,6 +9,6 @@ import java.util.Optional;
 @Repository
 public interface VideoGameRepository extends JpaRepository<VideoGame, Integer> {
 
-    Optional<VideoGame> findByName(String name);
+    Optional<VideoGame> findByName (String name);
 
 }
