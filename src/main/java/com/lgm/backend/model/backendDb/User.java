@@ -24,14 +24,30 @@ public class User implements Serializable , UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id ;
+
+    @Column(name = "first_name",nullable = false)
     String firstName ;
+
+    @Column(name = "last_name",nullable = false)
     String lastName ;
+
+    @Column(name = "email",nullable = false)
     String email;
+
+    @Column(name = "password",nullable = false)
     String password ;
 
     @ManyToMany(fetch = FetchType.EAGER  , cascade = CascadeType.PERSIST)
     List <Role> roles ;
 
+
+    public User(String firstName, String lastName, String email, String password, List<Role> roles) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.roles=roles;
+    }
 
     public User (String email , String password , List<Role> roles) {
         this.email= email ;
