@@ -15,4 +15,4 @@ jobs:
 
       - name: Effectuer une requête HTTP
         run: |
-          curl -X POST http://16.16.127.64:6969/webhook
+          curl -X POST http://16.16.4.174:6969/webhook
