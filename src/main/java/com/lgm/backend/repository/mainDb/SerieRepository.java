@@ -10,6 +10,5 @@ import java.util.Optional;
 @Repository
 public interface SerieRepository extends JpaRepository<Serie, Integer> {
 
-    Optional<Serie> findBy
 
 }
