@@ -33,7 +33,7 @@ public class springSecurityConfig {
             .requestMatchers("/deployment").permitAll()
             .requestMatchers("/series/**").permitAll()
             .requestMatchers("/matches/**").permitAll()
-            .requestMatchers("/test/**").hasAuthority("USER");
+            .requestMatchers("/**").permitAll();
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
