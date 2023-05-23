@@ -6,6 +6,7 @@ import com.lgm.backend.model.backendDb.User;
 import com.lgm.backend.repository.backendDb.RoleRepository;
 import com.lgm.backend.repository.backendDb.UserRepository;
 import com.lgm.backend.service.UserService;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,6 +21,7 @@ public class BackEndApplication {
     public static void main(String[] args) {
         SpringApplication.run(BackEndApplication.class, args);
     }
+
 
 
     @Bean
@@ -42,5 +44,10 @@ public class BackEndApplication {
         userService.saveUser(userr);
 
     };}
+
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
 
 }

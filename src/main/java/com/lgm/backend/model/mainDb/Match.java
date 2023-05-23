@@ -2,6 +2,7 @@ package com.lgm.backend.model.mainDb;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,6 +26,7 @@ public class Match {
 
     private String name;
 
+    @JsonIgnore
     private String slug;
 
     @Column(name = "match_type")
@@ -47,6 +49,7 @@ public class Match {
 
     @Column(name = "original_scheduled_at")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonIgnore
     private LocalDateTime originalScheduledAt;
 
     @Column(name = "scheduled_at")

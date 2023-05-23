@@ -19,29 +19,8 @@ import java.util.Optional;
 public class SeriesService {
 
     private final SerieRepository serieRepository;
-    private final LeagueRepository leagueRepository;
-    private final VideoGameRepository videoGameRepository;
-
-    public Iterable<Serie> getSeriesByVideoGame(String name){
-
-
-     //   Optional<VideoGame> videoGame = videoGameRepository.findByName(name);
-     //
-     //   System.out.println(LocalTime.now());
-     //
-     //   Iterable<League> leagueIterable = leagueRepository.findAllByVideogame(videoGame.orElse(null));
-     //
-     //   System.out.println(LocalTime.now());
-     //
-     //   Iterable<Serie> series = serieRepository.findAllByLeagueIdIn(leagueIterable);
-     //
-     //
-     //   return series;
-
-        Iterable<Serie> series = serieRepository.findAllByVideoGameName(name);
-
+    public List<Serie> getSeriesByVideoGame(String name){
+        List<Serie> series = serieRepository.findAllByVideoGameName(name);
         return series;
-
     }
-
 }

@@ -32,11 +32,9 @@ public class Serie {
     @JsonIgnore
     private String slug;
 
-    @JsonIgnore
     @Column(name = "begin_at")
     private LocalDateTime beginAt;
 
-    @JsonIgnore
     @Column(name = "end_at")
     private LocalDateTime endAt;
 

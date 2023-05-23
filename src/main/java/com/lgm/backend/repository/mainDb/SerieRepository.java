@@ -17,6 +17,6 @@ public interface SerieRepository extends JpaRepository<Serie, Integer> {
     List<Serie> findAllByLeagueId (League leagueId);
 
     @Query("SELECT s FROM Serie s INNER JOIN s.leagueId l INNER JOIN l.videogame vg WHERE vg.name = :name")
-    Iterable<Serie> findAllByVideoGameName(String name);
+    List<Serie> findAllByVideoGameName(String name);
 
 }

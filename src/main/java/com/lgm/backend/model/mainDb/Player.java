@@ -1,5 +1,6 @@
 package com.lgm.backend.model.mainDb;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,6 +35,7 @@ public class Player {
 
     private String role;
 
+    @JsonIgnore
     private String slug;
 
     @ManyToOne
