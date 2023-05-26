@@ -10,7 +10,7 @@ public class SeriesDto {
 
     private Integer id;
 
-    private League leagueId;
+    private LeagueDto leagueId;
 
     private String fullName;
 

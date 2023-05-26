@@ -15,6 +15,6 @@ public class TournamentDto {
 
     private SeriesDto serie;
 
-    private Team winner;
+    private TeamDto winner;
 
 }

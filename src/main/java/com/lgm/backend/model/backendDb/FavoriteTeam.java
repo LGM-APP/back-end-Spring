@@ -1,6 +1,5 @@
 package com.lgm.backend.model.backendDb;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -12,21 +11,21 @@ import lombok.experimental.FieldDefaults;
 @ToString
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Favorite {
+public class FavoriteTeam {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id ;
+    private Integer id;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    User userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User userId;
 
+    @Column(name = "id_Team")
+    private Integer idTeam;
 
-    @Column(name ="favorite_id", nullable = false)
-    Integer favoriteId;
-
-    @Column(name ="type", nullable = false)
-    String type;
-
+    public FavoriteTeam(User userId, Integer idTeam) {
+        this.userId = userId;
+        this.idTeam = idTeam;
+    }
 }
