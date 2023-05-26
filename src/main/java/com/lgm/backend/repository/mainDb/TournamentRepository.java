@@ -14,7 +14,6 @@ import java.util.Optional;
 @Repository
 public interface TournamentRepository extends JpaRepository<Tournament, Integer> {
 
-    @Query("SELECT t FROM Tournament t INNER JOIN t.serie s INNER JOIN s.leagueId l INNER JOIN l.videogame vg WHERE vg.name = :name")
-    List<Tournament> findAllTournamentsByVideoGameName(String name);
+    List<Tournament> findTournamentBySerieId(Integer id);
 
 }

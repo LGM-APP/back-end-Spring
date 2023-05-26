@@ -22,10 +22,12 @@ public class TournamentController {
 
     private final TournamentService tournamentService;
 
-    @GetMapping("/{videogame}")
+    @GetMapping("/series/{id}")
     @ResponseBody
-    List<TournamentDto> getbyName(@PathVariable("videogame") String videogame){
-        return tournamentService.getTounamentsByVideoGame(videogame).stream().map(tournament -> modelMapper.map(tournament, TournamentDto.class))
+    List<TournamentDto> getbyName(@PathVariable("id") Integer id){
+        return tournamentService.getTounamentsBySeriesId(id).stream().map(tournament -> modelMapper.map(tournament, TournamentDto.class))
                 .collect(Collectors.toList());
     }
+
+
 }

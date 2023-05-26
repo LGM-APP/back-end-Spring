@@ -15,7 +15,8 @@ import java.util.List;
 @Repository
 public interface MatchRepository extends JpaRepository<Match, Integer> {
 
-    List<Match> findAllByBeginAtAfter(LocalDateTime beginAt);
+ List<Match> findAllByBeginAtAfterAndTournamentId(LocalDateTime beginAt, Integer tournament_id);
 
+ List<Match> findAllByBeginAtAfterAndBeginAtBeforeOrderByBeginAtAsc(LocalDateTime now, LocalDateTime oneWeekLater);
 
 }
