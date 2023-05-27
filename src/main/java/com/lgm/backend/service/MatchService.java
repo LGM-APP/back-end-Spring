@@ -26,6 +26,10 @@ public class MatchService {
         return  matchRepository.findAllByBeginAtAfterAndBeginAtBeforeOrderByBeginAtAsc(LocalDateTime.now(),LocalDateTime.now().plusWeeks(1));
     }
 
+    public List<Match> getMatchByTeamId(Integer id){
+        return matchRepository.findByHomeIdOrAwayId(id);
+    }
+
 
 
 

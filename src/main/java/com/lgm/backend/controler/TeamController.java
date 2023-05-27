@@ -30,8 +30,8 @@ public class TeamController {
     }
 
 
-    @GetMapping("/teams/search")
-    public List<TeamDto> searchTeamsByName(@RequestParam("name") String name) {
+    @GetMapping("/search")
+    public List<TeamDto> searchTeamsByName(@RequestParam(value = "name", required = false,defaultValue = "") String name) {
         return teamService.searchTeamsByName(name).stream().map(team -> modelMapper.map(team, TeamDto.class))
                 .collect(Collectors.toList());
     }

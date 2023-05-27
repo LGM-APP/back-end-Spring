@@ -24,15 +24,24 @@ public class MatchController {
 
     @GetMapping("/all")
     @ResponseBody
-    public Iterable<MatchDto> getMatchBySerieId(){
+    public Iterable<MatchDto> getAllMatch(){
             return matchService.getAllMatchDontBegin().stream().map(match -> modelMapper.map(match, MatchDto.class))
                     .collect(Collectors.toList());
     }
 
     @GetMapping("/tournament/{id}")
     @ResponseBody
-    public Iterable<MatchDto> getMatchBySerieId(@PathVariable("id") Integer id){
+    public Iterable<MatchDto> getMatchByTournamentId(@PathVariable("id") Integer id){
         return matchService.getMatchByTournamentId(id).stream().map(match -> modelMapper.map(match, MatchDto.class))
                 .collect(Collectors.toList());
     }
+
+    @GetMapping("/team/{id}")
+    @ResponseBody
+    public Iterable<MatchDto> getMatchByTeamId(@PathVariable("id") Integer id){
+        return matchService.getMatchByTeamId(id).stream().map(match -> modelMapper.map(match, MatchDto.class))
+                .collect(Collectors.toList());
+    }
+
+
 }
