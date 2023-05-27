@@ -40,9 +40,9 @@ public class TeamFavoriteService implements IfavoriteService<FavoriteTeam>{
             return null;
         }
 
-        FavoriteTeam favoriteTeam =new FavoriteTeam(userId,elementId)
 
-        return favoriteTeamRepository.
+
+        return null;
 
     }
 

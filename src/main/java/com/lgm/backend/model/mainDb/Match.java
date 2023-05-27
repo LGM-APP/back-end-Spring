@@ -4,10 +4,13 @@ package com.lgm.backend.model.mainDb;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.validator.constraints.CreditCardNumber;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -31,6 +34,7 @@ public class Match {
 
     @Column(name = "match_type")
     private String matchType;
+
 
     @Column(name = "number_of_games")
     private Integer numberOfGames;

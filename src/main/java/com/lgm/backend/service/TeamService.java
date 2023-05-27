@@ -15,6 +15,7 @@ import java.util.Optional;
 @Service
 public class TeamService{
 
+    int MAX_SUGGESTIONS = 20;
     private final TeamRepository teamRepository;
 
     public Optional<Team> getTeam(Integer id){
@@ -24,5 +25,11 @@ public class TeamService{
     public Page<Team> getallTeamByPage(Integer page){
         return  teamRepository.findAll(PageRequest.of(page,10));
     }
+
+    public List<Team> searchTeamsByName(String name) {
+        return teamRepository.findByNameContainingIgnoreCase(name, PageRequest.of(0, MAX_SUGGESTIONS));
+    }
+
+
 
 }
