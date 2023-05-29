@@ -14,31 +14,43 @@ public class PointService {
 
     private final UserRepository userRepository;
 
-    public void add(Integer point,String email){
+    public void add(Float point, String email){
         Optional<User> optionalUser = userRepository.findByEmail(email);
 
         if (optionalUser.isPresent()){
 
             User user = optionalUser.get();
-            Integer newPoint = user.getPoint() + point;
+            Float newPoint = user.getPoint() + point;
             user.setPoint(newPoint);
 
         }
     }
 
-    public void remove(Integer point,String email){
+    public void addPointOdd(Float odd, Float point, String email){
         Optional<User> optionalUser = userRepository.findByEmail(email);
 
         if (optionalUser.isPresent()){
 
             User user = optionalUser.get();
-            Integer newPoint = user.getPoint() + point;
+            float newPoint = user.getPoint() + point*odd;
             user.setPoint(newPoint);
 
         }
     }
 
-    public Integer getPoint(String email){
+    public void remove(Float point,String email){
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+
+        if (optionalUser.isPresent()){
+
+            User user = optionalUser.get();
+            Float newPoint = user.getPoint() - point;
+            user.setPoint(newPoint);
+
+        }
+    }
+
+    public Float getPoint(String email){
         Optional<User> optionalUser = userRepository.findByEmail(email);
 
         if (optionalUser.isPresent()){

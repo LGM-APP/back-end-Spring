@@ -30,12 +30,12 @@ public class Bet {
     Integer betTeamId;
 
     @Column(nullable = false)
-    Integer amount;
+    Float amount;
 
     @Column(nullable = false)
     Float odd;
 
-    public Bet(User userId, Integer matchId, Integer betTeamId, Integer amount, Float odd) {
+    public Bet(User userId, Integer matchId, Integer betTeamId, Float amount, Float odd) {
         this.userId = userId;
         this.matchId = matchId;
         this.betTeamId = betTeamId;

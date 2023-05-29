@@ -4,55 +4,82 @@ import com.lgm.backend.model.backendDb.Bet;
 import com.lgm.backend.model.backendDb.User;
 import com.lgm.backend.model.mainDb.Match;
 import com.lgm.backend.repository.backendDb.BetRepository;
+
 import com.lgm.backend.repository.backendDb.UserRepository;
 import com.lgm.backend.repository.mainDb.MatchRepository;
-import com.lgm.backend.repository.mainDb.TeamRepository;
+
 import com.lgm.backend.security.JwtUtilities;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.util.*;
 
 
 @Service
 @RequiredArgsConstructor
 public class BetService {
 
-  //  private final PointService pointService;
-  //  private final JwtUtilities jwtUtilities;
-  //  private final UserService userService;
-  //
-  //  private final BetRepository betRepository;
-  //  private final MatchRepository matchRepository;
-  //  private final TeamRepository teamRepository;
-  //  private final MatchOpponentRepository matchOpponentRepository;
-  //
-  //  public Bet addBet(String token, Integer match_id, Integer betTeam, Integer amount){
-  //      String email = jwtUtilities.extractUsername(token);
-  //
-  //      Optional<Match> match = matchRepository.findById(match_id);
-  //      Optional<MatchOpponent> matchOpponentOptional = matchOpponentRepository.findByMatchId(match_id);
-  //      Optional<User> userOptional = userService.getUser(email);
-  //
-  //      if (matchOpponentOptional.isEmpty() || userOptional.isEmpty()|| match.isEmpty()){
-  //          return null;
-  //      }
-  //
-  //      User user = userOptional.get();
-  //
-  //      MatchOpponent matchOpponent = matchOpponentOptional.get();
-  //      Integer idAway = matchOpponent.getAway().getId();
-  //      Integer idHome = matchOpponent.getHome().getId();
-  //
-  //      if ((!Objects.equals(idAway, betTeam) && !Objects.equals(idHome, betTeam))  || pointService.getPoint(email) < amount || match.get().getStatus().equals("finished")){
-  //          return null;
-  //      }
-  //
-  //      Float fl = 2.156F;
-  //
-  //      return new Bet(user, match_id, betTeam ,amount, fl);
-  //  }
+    private final PointService pointService;
+    private final JwtUtilities jwtUtilities;
+    private final UserService userService;
+
+    private final BetRepository betRepository;
+    private final MatchRepository matchRepository;
+    private final UserRepository userRepository;
+
+
+
+    public Bet addBet(String token, Integer match_id, Integer betTeam, Float amount){
+        String email = jwtUtilities.extractUsername(token);
+
+        Optional<Match> matchOptional = matchRepository.findById(match_id);
+        Optional<User> userOptional = userService.getUser(email);
+        boolean betExist = betRepository.existsByMatchIdAndUserId_Email(match_id,email);
+
+        if ( userOptional.isEmpty()|| matchOptional.isEmpty()|| betExist){
+            return new Bet(null,null,null,null,null);
+        }
+
+        User user = userOptional.get();
+        Match match = matchOptional.get();
+
+        Integer idAway = match.getAway().getId();
+        Integer idHome = match.getHome().getId();
+
+        if (pointService.getPoint(email) < amount || match.getStatus().equals("finished")){
+            return new Bet(null,null,null,null,null);
+        }
+
+        Float fl = 2.156F;
+
+        pointService.remove(amount,email);
+
+        return betRepository.save(new Bet(user, match_id, betTeam ,amount, fl));
+    }
+
+    public void checkBet(){
+        Set<Bet> bets = new HashSet<>(betRepository.findAll());
+
+        for (Bet bet:bets){
+
+            Optional<User> userOptional = userRepository.findById(bet.getUserId().getId());
+            Optional<Match> matchOptional = matchRepository.findById(bet.getMatchId());
+
+            if (matchOptional.isEmpty() || userOptional.isEmpty()){continue;}
+
+            User user = userOptional.get();
+            Match match = matchOptional.get();
+
+            if (match.getStatus().equals("finished")){
+                if (Objects.equals(match.getWinner().getId(), bet.getBetTeamId())){
+                    pointService.addPointOdd(bet.getOdd(), bet.getAmount(), user.getEmail());
+                }
+                betRepository.delete(bet);
+            }
+        }
+    }
+
 
     
 

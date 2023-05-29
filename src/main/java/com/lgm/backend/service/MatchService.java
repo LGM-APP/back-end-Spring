@@ -23,7 +23,7 @@ public class MatchService {
     }
 
     public List<Match> getAllMatchDontBegin(){
-        return  matchRepository.findAllByBeginAtAfterAndBeginAtBeforeOrderByBeginAtAsc(LocalDateTime.now(),LocalDateTime.now().plusWeeks(1));
+        return  matchRepository.findAllByStatusNotLikeAndBeginAtAfterOrderByBeginAtAsc("canceled",LocalDateTime.now());
     }
 
     public List<Match> getMatchByTeamId(Integer id){

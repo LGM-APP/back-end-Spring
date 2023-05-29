@@ -13,10 +13,12 @@ import java.util.List;
 
 @Repository
 public interface MatchRepository extends JpaRepository<Match, Integer> {
+ List<Match> findByStatusNotLike(String status);
 
  List<Match> findAllByBeginAtAfterAndTournamentId(LocalDateTime beginAt, Integer tournament_id);
 
- List<Match> findAllByBeginAtAfterAndBeginAtBeforeOrderByBeginAtAsc(LocalDateTime now, LocalDateTime oneWeekLater);
+
+ List<Match> findAllByStatusNotLikeAndBeginAtAfterOrderByBeginAtAsc(String status,LocalDateTime now);
 
  @Query("SELECT m FROM Match m where m.away.id=:id or m.home.id=:id")
  List<Match> findByTeamId(Integer id);

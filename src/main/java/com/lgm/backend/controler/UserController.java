@@ -33,11 +33,6 @@ public class UserController {
     }
 
 
-
-
-
-
-
     @PostMapping("/login")
     @ResponseBody
     public BearerToken authenticate(@RequestBody LoginDto loginDto) {

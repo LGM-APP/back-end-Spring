@@ -38,7 +38,7 @@ public class User implements Serializable , UserDetails {
     String password ;
 
     @Column(nullable = false)
-    Integer point = 250;
+    Float point = 250F;
 
     @ManyToMany(fetch = FetchType.EAGER  , cascade = CascadeType.PERSIST)
     List <Role> roles ;
