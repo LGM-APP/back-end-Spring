@@ -27,7 +27,7 @@ public class MatchService {
     }
 
     public List<Match> getMatchByTeamId(Integer id){
-        return matchRepository.findByHomeIdOrAwayId(id);
+       return matchRepository.findByTeamId(id);
     }
 
 

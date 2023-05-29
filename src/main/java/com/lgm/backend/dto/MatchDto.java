@@ -19,12 +19,14 @@ public class MatchDto {
     private TournamentDto tournament;
     private String status;
     private Boolean draw;
-    private Team winner;
+    private TeamDto winner;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime scheduledAt;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime beginAt;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime endAt;
+    private TeamDto away;
+    private TeamDto home;
 
 }

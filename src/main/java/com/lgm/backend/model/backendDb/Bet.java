@@ -35,5 +35,11 @@ public class Bet {
     @Column(nullable = false)
     Float odd;
 
-
+    public Bet(User userId, Integer matchId, Integer betTeamId, Integer amount, Float odd) {
+        this.userId = userId;
+        this.matchId = matchId;
+        this.betTeamId = betTeamId;
+        this.amount = amount;
+        this.odd = odd;
+    }
 }

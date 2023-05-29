@@ -35,7 +35,6 @@ public class Match {
     @Column(name = "match_type")
     private String matchType;
 
-
     @Column(name = "number_of_games")
     private Integer numberOfGames;
 
@@ -67,5 +66,14 @@ public class Match {
     @Column(name = "end_at")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime endAt;
+
+    @ManyToOne
+    @JoinColumn(name = "home_id")
+    private Team home;
+
+    @ManyToOne
+    @JoinColumn(name = "away_id")
+    private Team away;
+
 
 }

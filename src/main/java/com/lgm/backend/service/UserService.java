@@ -26,16 +26,14 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
-
     private final RoleRepository roleRepository;
-
-    private final VideoGameRepository videoGameRepository;
 
     private final JwtUtilities jwtUtilities;
     private final AuthenticationManager authenticationManager;
@@ -54,10 +52,11 @@ public class UserService {
         return userRepository.findAll();
     }
 
-
-    public Iterable<VideoGame> videoGame(){
-        return videoGameRepository.findAll();
+    public Optional<User> getUser(String email){
+        return userRepository.findByEmail(email);
     }
+
+
 
     public ResponseEntity<?> register(RegisterDto registerDto) {
         if(userRepository.existsByEmail(registerDto.getEmail()))
