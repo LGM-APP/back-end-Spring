@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public class TeamService{
 
     int MAX_SUGGESTIONS = 20;
-    int PAGE_SIZE = 10;
+    int PAGE_SIZE = 12;
     private final TeamRepository teamRepository;
     private final ModelMapper modelMapper;
 
