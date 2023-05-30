@@ -2,6 +2,7 @@ package com.lgm.backend.controler;
 
 
 import com.lgm.backend.dto.TeamDto;
+import com.lgm.backend.dto.TeamPage;
 import com.lgm.backend.service.MatchService;
 import com.lgm.backend.service.TeamService;
 import lombok.RequiredArgsConstructor;
@@ -24,9 +25,8 @@ public class TeamController {
 
     @GetMapping("/page/{page}")
     @ResponseBody
-    public List<TeamDto> getAllTeam(@PathVariable("page") Integer page){
-        return teamService.getallTeamByPage(page).stream().map(team -> modelMapper.map(team, TeamDto.class))
-                .collect(Collectors.toList());
+    public TeamPage getAllTeam(@PathVariable("page") Integer page){
+        return teamService.getallTeamByPage(page);
     }
 
 
