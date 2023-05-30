@@ -2,6 +2,7 @@ package com.lgm.backend.controler;
 
 
 import com.lgm.backend.dto.MatchDto;
+import com.lgm.backend.dto.MatchPage;
 import com.lgm.backend.dto.SeriesDto;
 import com.lgm.backend.model.mainDb.Match;
 import com.lgm.backend.service.MatchService;
@@ -22,11 +23,10 @@ public class MatchController {
 
     private final MatchService matchService;
 
-    @GetMapping("/all")
+    @GetMapping("/{page}")
     @ResponseBody
-    public Iterable<MatchDto> getAllMatch(){
-            return matchService.getAllMatchDontBegin().stream().map(match -> modelMapper.map(match, MatchDto.class))
-                    .collect(Collectors.toList());
+    public MatchPage getAllMatch(@PathVariable("page") Integer page){
+            return matchService.getAllMatchDontBegin(page);
     }
 
     @GetMapping("/tournament/{id}")

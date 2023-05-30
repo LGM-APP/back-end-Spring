@@ -31,7 +31,7 @@ public class TeamService{
 
     public TeamPage getallTeamByPage(Integer page){
 
-        Page<Team> teamPage = teamRepository.findAll(PageRequest.of(page, PAGE_SIZE));
+        Page<Team> teamPage = teamRepository.findAll(PageRequest.of(page-1, PAGE_SIZE));
         List<Team> teams = teamPage.getContent();
 
         List<TeamDto> teamsDto = teams.stream().map((element) -> modelMapper.map(element, TeamDto.class))

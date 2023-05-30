@@ -34,6 +34,9 @@ public class BackEndApplication {
         userService.saveRole(new Role(RoleName.SUPERADMIN));
         userService.saveUser(new User("admin","admin","admin@gmail.com", passwordEncoder.encode("adminPassword"), new ArrayList<>()));
         userService.saveUser(new User("superadmin","superadmin","superadminadmin@gmail.com", passwordEncoder.encode("superadminPassword"), new ArrayList<>()));
+        userService.saveUser(new User("yacine","Talhaoui","yacinetalhaoui13@gmail.com", passwordEncoder.encode("azertyuiop"), new ArrayList<>()));
+
+
 
         Role role = roleRepository.findByRoleName(RoleName.ADMIN);
         User user = userRepository.findByEmail("admin@gmail.com").orElse(null);
@@ -44,6 +47,11 @@ public class BackEndApplication {
         Role rolee = roleRepository.findByRoleName(RoleName.SUPERADMIN);
         userr.getRoles().add(rolee);
         userService.saveUser(userr);
+
+        User user1 = userRepository.findByEmail("yacinetalhaoui13@gmail.com").orElse(null);
+        Role role1 = roleRepository.findByRoleName(RoleName.USER);
+        user1.getRoles().add(role1);
+        userService.saveUser(user1);
 
     };}
 

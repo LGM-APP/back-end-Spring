@@ -16,4 +16,6 @@ public interface TeamRepository extends JpaRepository<Team, Integer> {
 
     List<Team> findByNameContainingIgnoreCase(String name, Pageable pageable);
 
+
+
 }
