@@ -13,7 +13,7 @@ import java.util.List;
 
 @Repository
 public interface MatchRepository extends JpaRepository<Match, Integer> {
- List<Match> findByStatusNotLike(String status);
+
 
  List<Match> findAllByBeginAtAfterAndTournamentId(LocalDateTime beginAt, Integer tournament_id);
 

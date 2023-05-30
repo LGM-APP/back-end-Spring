@@ -1,8 +1,7 @@
 package com.lgm.backend.dto;
 
-import com.lgm.backend.dto.UserDto;
+
 import lombok.Data;
-import lombok.Value;
 
 import java.io.Serializable;
 

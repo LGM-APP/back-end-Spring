@@ -12,7 +12,7 @@ import com.lgm.backend.security.JwtUtilities;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+
 import java.util.*;
 
 
@@ -58,8 +58,13 @@ public class BetService {
         return betRepository.save(new Bet(user, match_id, betTeam ,amount, fl));
     }
 
+    public List<Bet> getBetByEmail(String token){
+        return betRepository.findByUserId_Email(jwtUtilities.extractUsername(token));
+    }
+
     public void checkBet(){
-        Set<Bet> bets = new HashSet<>(betRepository.findAll());
+        List<Bet> bets = new ArrayList<>(betRepository.findAll()) {
+        };
 
         for (Bet bet:bets){
 
