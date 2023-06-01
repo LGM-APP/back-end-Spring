@@ -3,6 +3,8 @@ package com.lgm.backend.repository.mainDb;
 
 import com.lgm.backend.model.mainDb.League;
 import com.lgm.backend.model.mainDb.Serie;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,6 +15,7 @@ import java.util.List;
 
 @Repository
 public interface SerieRepository extends JpaRepository<Serie, Integer> {
+    Page<Serie> findByLeagueId_Videogame_NameOrderByBeginAtDesc(String name, Pageable pageable);
 
     List<Serie> findAllByLeagueId (League leagueId);
 

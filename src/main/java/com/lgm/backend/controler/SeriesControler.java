@@ -1,5 +1,6 @@
 package com.lgm.backend.controler;
 
+import com.lgm.backend.dto.SeriePage;
 import com.lgm.backend.dto.SeriesDto;
 import com.lgm.backend.service.SeriesService;
 import lombok.RequiredArgsConstructor;
@@ -22,11 +23,17 @@ public class SeriesControler {
     private final SeriesService seriesService;
 
 
-    @GetMapping("/{videogame}")
+    @GetMapping("/{videoGame}")
     @ResponseBody
-    List<SeriesDto> getbyName(@PathVariable("videogame") String videogame){
+    List<SeriesDto> getByVideoGame(@PathVariable("videoGame") String videogame){
         return seriesService.getSeriesByVideoGame(videogame).stream().map(serie -> modelMapper.map(serie, SeriesDto.class))
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("/all/{videoGame}/{page}")
+    @ResponseBody
+    SeriePage getAllByVideoGame(@PathVariable("videoGame") String videogame, @PathVariable("page") Integer page){
+        return seriesService.getPageSeriesByVideogame(videogame,page);
     }
 
 }

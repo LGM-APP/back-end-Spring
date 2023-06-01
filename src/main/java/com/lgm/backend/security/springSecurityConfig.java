@@ -29,10 +29,9 @@ public class springSecurityConfig {
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeHttpRequests()
-            .requestMatchers("/user/**").permitAll()
-            .requestMatchers("/deployment").permitAll()
-            .requestMatchers("/series/**").permitAll()
-            .requestMatchers("/matches/**").permitAll()
+            .requestMatchers("/bet/**").hasAuthority("USER")
+            .requestMatchers("/favorite/**").hasAuthority("USER")
+            .requestMatchers("/user/get").hasAuthority("USER")
             .requestMatchers("/**").permitAll();
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
