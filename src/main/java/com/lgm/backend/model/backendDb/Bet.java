@@ -35,6 +35,9 @@ public class Bet {
     @Column(nullable = false)
     Float odd;
 
+    @Column(name = "is_finished" ,nullable = false)
+    Boolean isFinished = false;
+
     public Bet(User userId, Integer matchId, Integer betTeamId, Float amount, Float odd) {
         this.userId = userId;
         this.matchId = matchId;

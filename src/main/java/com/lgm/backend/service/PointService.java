@@ -22,7 +22,7 @@ public class PointService {
             User user = optionalUser.get();
             Float newPoint = user.getPoint() + point;
             user.setPoint(newPoint);
-
+            userRepository.save(user);
         }
     }
 
@@ -34,7 +34,7 @@ public class PointService {
             User user = optionalUser.get();
             float newPoint = user.getPoint() + point*odd;
             user.setPoint(newPoint);
-
+            userRepository.save(user);
         }
     }
 

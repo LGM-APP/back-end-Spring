@@ -63,8 +63,8 @@ public class BetService {
     }
 
     public void checkBet(){
-        List<Bet> bets = new ArrayList<>(betRepository.findAll()) {
-        };
+        List<Bet> bets = new ArrayList<>(betRepository.findByIsFinished(false)) {};
+
 
         for (Bet bet:bets){
 
@@ -80,7 +80,8 @@ public class BetService {
                 if (Objects.equals(match.getWinner().getId(), bet.getBetTeamId())){
                     pointService.addPointOdd(bet.getOdd(), bet.getAmount(), user.getEmail());
                 }
-                betRepository.delete(bet);
+                bet.setIsFinished(true);
+                betRepository.save(bet);
             }
         }
     }
