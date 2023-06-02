@@ -34,7 +34,7 @@ public class MatchService {
     }
 
     public MatchPage getAllMatchDontBegin(Integer page){
-        Page<Match> matchPage =  matchRepository.findAllByAway_NameNotLikeAndHome_NameNotLikeAndStatusNotLikeAndBeginAtBetweenAndAwayNotNullAndHomeNotNullOrderByBeginAtAsc ("Empty Team","Empty Team","canceled",LocalDateTime.now(),LocalDateTime.now().plusDays(1), PageRequest.of(page-1, PAGE_SIZE));
+        Page<Match> matchPage =  matchRepository.findAllByAway_NameNotLikeAndHome_NameNotLikeAndStatusNotLikeAndBeginAtBetweenAndAwayNotNullAndHomeNotNullOrderByBeginAtAsc ("Empty Team","Empty Team","canceled",LocalDateTime.now(),LocalDateTime.now().plusDays(7), PageRequest.of(page-1, PAGE_SIZE));
         List<Match> matches = matchPage.toList();
 
 
