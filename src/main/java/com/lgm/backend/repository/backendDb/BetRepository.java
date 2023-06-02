@@ -13,5 +13,7 @@ public interface BetRepository extends JpaRepository<Bet, Integer> {
     List<Bet> findByUserId_Email(String email);
     boolean existsByMatchIdAndUserId_Email(Integer matchId, String email);
 
+    @Query(value = "SELECT b FROM Bet b WHERE b.userId.email =:email order by b.id DESC ")
+    Page<Bet> findhistory( Pageable pageable,String email);
 
 }

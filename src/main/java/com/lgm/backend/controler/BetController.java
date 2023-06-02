@@ -1,6 +1,7 @@
 package com.lgm.backend.controler;
 
 import com.lgm.backend.dto.BetDto;
+import com.lgm.backend.dto.BetPage;
 import com.lgm.backend.security.JwtUtilities;
 import com.lgm.backend.service.BetService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,12 +32,10 @@ public class BetController {
         return modelMapper.map(betService.addBet(token, match_id, betTeam, amount), BetDto.class);
     }
 
-    @GetMapping("/get")
-    public List<BetDto> getBet(@NonNull HttpServletRequest request){
+    @GetMapping("/get/{page}")
+    public BetPage getBet(@NonNull HttpServletRequest request, @PathVariable(value = "page") Integer page){
         String token = jwtUtilities.getToken(request);
-
-        return betService.getBetByEmail(token).stream().map((element) -> modelMapper.map(element, BetDto.class))
-                .collect(Collectors.toList());
+        return betService.getAllBetByPage(page,token);
     }
 
 }

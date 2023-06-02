@@ -48,6 +48,7 @@ public class BetService {
         Optional<User> userOptional = userService.getUser(email);
         boolean betExist = betRepository.existsByMatchIdAndUserId_Email(match_id,email);
 
+
         if ( userOptional.isEmpty()|| matchOptional.isEmpty()|| betExist){
             return new Bet(null,null,null,null,null);
         }
@@ -64,8 +65,6 @@ public class BetService {
 
         Float odd = idAway.equals(betTeam)?match.getAwayOdd():match.getHomeOdd();
 
-
-        pointService.remove(amount,email);
 
         try {
             pointService.remove(amount, email);
@@ -103,19 +102,19 @@ public class BetService {
         }
     }
 
-   // public BetPage getAllBetByPage(Integer page, String token){
-   //     String email = jwtUtilities.extractUsername(token);
-   //
-   //     Page<Bet> betPage = betRepository.findByUserId_EmailOrderByDescGroupByIsfinished(PageRequest.of(page-1,PAGE_SIZE),email);
-   //     List<BetDto> betDtoList = betPage.stream().toList().stream().map((element) -> modelMapper.map(element, BetDto.class)).toList();
-   //     int totalPage = betPage.getTotalPages();
-   //
-   //     BetPage result = new BetPage();
-   //     result.setTotalPages(totalPage);
-   //     result.setSeries(betDtoList);
-   //     return result;
-   //
-   // }
+    public BetPage getAllBetByPage(Integer page, String token){
+        String email = jwtUtilities.extractUsername(token);
+
+        Page<Bet> betPage = betRepository.findhistory(PageRequest.of(page-1,PAGE_SIZE),email);
+        List<BetDto> betDtoList = betPage.stream().toList().stream().map((element) -> modelMapper.map(element, BetDto.class)).toList();
+        int totalPage = betPage.getTotalPages();
+
+        BetPage result = new BetPage();
+        result.setTotalPages(totalPage);
+        result.setSeries(betDtoList);
+        return result;
+
+    }
 
 
     
