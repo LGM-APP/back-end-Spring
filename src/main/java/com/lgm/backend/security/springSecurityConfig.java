@@ -31,7 +31,8 @@ public class springSecurityConfig {
             .authorizeHttpRequests()
             .requestMatchers("/bet/**").hasAuthority("USER")
             .requestMatchers("/favorite/**").hasAuthority("USER")
-            .requestMatchers("/user/get").hasAuthority("USER");
+            .requestMatchers("/user/get").hasAuthority("USER")
+            .requestMatchers("/**").permitAll();
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
