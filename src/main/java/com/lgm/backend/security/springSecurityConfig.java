@@ -29,10 +29,19 @@ public class springSecurityConfig {
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeHttpRequests()
+            .requestMatchers("/user/login").permitAll()
+            .requestMatchers("/user/register").permitAll()
+            .requestMatchers("/matchs/**").permitAll()
+            .requestMatchers("/player/**").permitAll()
+            .requestMatchers("/series/**").permitAll()
+            .requestMatchers("/tournaments/**").permitAll()
+            .requestMatchers("/team/**").permitAll()
+            .requestMatchers("/swagger-ui/**").permitAll()
+            .requestMatchers("/v3/**").permitAll()
+            .requestMatchers("/swagger-ui.html").permitAll()
             .requestMatchers("/bet/**").hasAuthority("USER")
             .requestMatchers("/favorite/**").hasAuthority("USER")
-            .requestMatchers("/user/get").hasAuthority("USER")
-            .requestMatchers("/**").permitAll();
+            .requestMatchers("/user/get").hasAuthority("USER");
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
