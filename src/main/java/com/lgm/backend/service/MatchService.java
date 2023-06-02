@@ -37,6 +37,7 @@ public class MatchService {
         Page<Match> matchPage =  matchRepository.findAllByStatusNotLikeAndBeginAtAfterAndAwayNotNullAndHomeNotNullOrderByBeginAtAsc("canceled",LocalDateTime.now(), PageRequest.of(page-1, PAGE_SIZE));
         List<Match> matches = matchPage.toList();
 
+
         List<MatchDto> matchDtos = matches.stream().map((element) -> modelMapper.map(element, MatchDto.class))
                 .toList();
 

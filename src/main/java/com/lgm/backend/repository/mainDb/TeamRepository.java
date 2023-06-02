@@ -11,6 +11,7 @@ import java.util.List;
 
 @Repository
 public interface TeamRepository extends JpaRepository<Team, Integer> {
+    Page<Team> findByIdNot(Integer id, Pageable pageable);
 
     Page<Team> findAll(Pageable pageable);
 

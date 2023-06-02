@@ -1,5 +1,7 @@
 package com.lgm.backend.service;
 
+import com.lgm.backend.dto.BetDto;
+import com.lgm.backend.dto.BetPage;
 import com.lgm.backend.model.backendDb.Bet;
 import com.lgm.backend.model.backendDb.User;
 import com.lgm.backend.model.mainDb.Match;
@@ -10,11 +12,17 @@ import com.lgm.backend.repository.mainDb.MatchRepository;
 
 import com.lgm.backend.security.JwtUtilities;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.dao.CannotAcquireLockException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
 import java.io.Console;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -29,6 +37,8 @@ public class BetService {
     private final MatchRepository matchRepository;
     private final UserRepository userRepository;
 
+    Integer PAGE_SIZE = 25;
+    private final ModelMapper modelMapper;
 
 
     public Bet addBet(String token, Integer match_id, Integer betTeam, Float amount){
@@ -57,7 +67,12 @@ public class BetService {
 
         pointService.remove(amount,email);
 
-        return betRepository.save(new Bet(user, match_id, betTeam ,amount, odd));
+        try {
+            pointService.remove(amount, email);
+            return betRepository.save(new Bet(user, match_id, betTeam, amount, odd));
+        } catch (CannotAcquireLockException e) {
+            return addBet(token, match_id, betTeam, amount);
+        }
     }
 
     public List<Bet> getBetByEmail(String token){
@@ -86,6 +101,20 @@ public class BetService {
                 betRepository.save(bet);
             }
         }
+    }
+
+    public BetPage getAllBetByPage(Integer page, String token){
+        String email = jwtUtilities.extractUsername(token);
+
+        Page<Bet> betPage = betRepository.findByUserId_EmailOrderByDescGroupByIsfinished(PageRequest.of(page-1,PAGE_SIZE),email);
+        List<BetDto> betDtoList = betPage.stream().toList().stream().map((element) -> modelMapper.map(element, BetDto.class)).toList();
+        int totalPage = betPage.getTotalPages();
+
+        BetPage result = new BetPage();
+        result.setTotalPages(totalPage);
+        result.setSeries(betDtoList);
+        return result;
+
     }
 
 

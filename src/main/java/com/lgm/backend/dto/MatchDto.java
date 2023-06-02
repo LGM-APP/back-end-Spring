@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 public class MatchDto {
 
     private Integer id;
-    private VideoGameDto videoGame;
     private String name;
     private String matchType;
     private Integer numberOfGames;

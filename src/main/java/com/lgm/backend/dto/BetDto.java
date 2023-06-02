@@ -14,4 +14,6 @@ public class BetDto implements Serializable {
     Integer betTeamId;
     Integer amount;
     Float odd;
+    Boolean isFinished;
+
 }

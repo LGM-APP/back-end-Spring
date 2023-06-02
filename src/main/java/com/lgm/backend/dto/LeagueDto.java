@@ -12,4 +12,6 @@ public class LeagueDto {
     private String imageUrl;
 
     private String name;
+
+    private VideoGameDto videoGame;
 }
