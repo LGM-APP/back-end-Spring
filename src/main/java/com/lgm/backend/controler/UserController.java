@@ -8,6 +8,7 @@ import com.lgm.backend.dto.RegisterDto;
 import com.lgm.backend.dto.UserDto;
 import com.lgm.backend.model.backendDb.User;
 import com.lgm.backend.security.JwtUtilities;
+import com.lgm.backend.service.PointService;
 import com.lgm.backend.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,7 @@ public class UserController {
     private final UserService userService;
     private final JwtUtilities jwtUtilities;
     private final ModelMapper modelMapper;
+    private final PointService pointService;
 
     @RequestMapping(value="/test", method=RequestMethod.GET, produces="application/json")
     @ResponseBody
@@ -37,6 +39,11 @@ public class UserController {
     @ResponseBody
     public ResponseEntity<?> register   (@RequestBody RegisterDto registerDto){
         return userService.register(registerDto);
+    }
+
+    @PostMapping("/addPoint/{point}")
+    public void addPoint(@NonNull HttpServletRequest request,@PathVariable("point")Float point){
+        pointService.add(point, jwtUtilities.extractUsername(jwtUtilities.getToken(request)));
     }
 
 
