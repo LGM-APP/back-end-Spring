@@ -36,9 +36,9 @@ public class SeriesService {
         return series;
     }
 
-    public SeriePage getPageSeriesByVideogame(String videoGame, Integer page){
+    public SeriePage getPageSeriesByVideogame(Integer page){
 
-        Page<Serie> seriePage = serieRepository.findByLeagueId_Videogame_NameOrderByBeginAtDesc(videoGame, PageRequest.of(page-1, PAGE_SIZE));
+        Page<Serie> seriePage = serieRepository.findAllByOrderByBeginAtDesc(PageRequest.of(page-1, PAGE_SIZE));
         List<SeriesDto> series = seriePage.stream().toList().stream().map((element) -> modelMapper.map(element, SeriesDto.class)).toList();
 
         SeriePage result = new SeriePage();

@@ -34,7 +34,7 @@ public class MatchService {
     }
 
     public MatchPage getAllMatchDontBegin(Integer page){
-        Page<Match> matchPage =  matchRepository.findAllByStatusNotLikeAndBeginAtAfterOrderByBeginAtAsc("canceled",LocalDateTime.now(), PageRequest.of(page-1, PAGE_SIZE));
+        Page<Match> matchPage =  matchRepository.findAllByStatusNotLikeAndBeginAtAfterAndAwayNotNullOrHomeNotNullOrderByBeginAtAsc("canceled",LocalDateTime.now(), PageRequest.of(page-1, PAGE_SIZE));
         List<Match> matches = matchPage.toList();
 
         List<MatchDto> matchDtos = matches.stream().map((element) -> modelMapper.map(element, MatchDto.class))

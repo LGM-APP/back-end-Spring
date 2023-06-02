@@ -15,9 +15,9 @@ import java.util.List;
 
 @Repository
 public interface SerieRepository extends JpaRepository<Serie, Integer> {
-    Page<Serie> findByLeagueId_Videogame_NameOrderByBeginAtDesc(String name, Pageable pageable);
+    Page<Serie> findAllByOrderByBeginAtDesc(Pageable pageable);
 
-    List<Serie> findAllByLeagueId (League leagueId);
+
 
     @Query("SELECT s FROM Serie s INNER JOIN s.leagueId l INNER JOIN l.videogame vg WHERE vg.name = :name AND current timestamp between s.beginAt and s.endAt")
     List<Serie> findAllByVideoGameName(@Param("name") String name);

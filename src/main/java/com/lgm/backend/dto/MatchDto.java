@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lgm.backend.model.mainDb.Team;
 import com.lgm.backend.model.mainDb.Tournament;
+import com.lgm.backend.model.mainDb.VideoGame;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 public class MatchDto {
 
     private Integer id;
+    private VideoGameDto videoGame;
     private String name;
     private String matchType;
     private Integer numberOfGames;

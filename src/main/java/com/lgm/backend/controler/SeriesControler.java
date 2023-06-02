@@ -30,10 +30,10 @@ public class SeriesControler {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/all/{videoGame}/{page}")
+    @GetMapping("/all/{page}")
     @ResponseBody
-    SeriePage getAllByVideoGame(@PathVariable("videoGame") String videogame, @PathVariable("page") Integer page){
-        return seriesService.getPageSeriesByVideogame(videogame,page);
+    SeriePage getAllByVideoGame(@PathVariable("page") Integer page){
+        return seriesService.getPageSeriesByVideogame(page);
     }
 
 }
