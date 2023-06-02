@@ -28,5 +28,7 @@ public class MatchDto {
     private LocalDateTime endAt;
     private TeamDto away;
     private TeamDto home;
+    private Float homeOdd;
+    private Float awayOdd;
 
 }

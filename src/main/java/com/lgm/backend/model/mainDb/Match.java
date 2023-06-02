@@ -75,5 +75,11 @@ public class Match {
     @JoinColumn(name = "away_id")
     private Team away;
 
+    @Column(name = "home_odd")
+    private Float homeOdd;
+
+    @Column(name = "away_odd")
+    private Float awayOdd;
+
 
 }

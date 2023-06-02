@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 
+import java.io.Console;
 import java.util.*;
 
 
@@ -51,11 +52,12 @@ public class BetService {
             return new Bet(null,null,null,null,null);
         }
 
-        Float fl = 2.156F;
+        Float odd = idAway.equals(betTeam)?match.getAwayOdd():match.getHomeOdd();
+
 
         pointService.remove(amount,email);
 
-        return betRepository.save(new Bet(user, match_id, betTeam ,amount, fl));
+        return betRepository.save(new Bet(user, match_id, betTeam ,amount, odd));
     }
 
     public List<Bet> getBetByEmail(String token){
