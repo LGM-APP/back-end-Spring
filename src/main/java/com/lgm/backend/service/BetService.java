@@ -103,19 +103,19 @@ public class BetService {
         }
     }
 
-    public BetPage getAllBetByPage(Integer page, String token){
-        String email = jwtUtilities.extractUsername(token);
-
-        Page<Bet> betPage = betRepository.findByUserId_EmailOrderByDescGroupByIsfinished(PageRequest.of(page-1,PAGE_SIZE),email);
-        List<BetDto> betDtoList = betPage.stream().toList().stream().map((element) -> modelMapper.map(element, BetDto.class)).toList();
-        int totalPage = betPage.getTotalPages();
-
-        BetPage result = new BetPage();
-        result.setTotalPages(totalPage);
-        result.setSeries(betDtoList);
-        return result;
-
-    }
+   // public BetPage getAllBetByPage(Integer page, String token){
+   //     String email = jwtUtilities.extractUsername(token);
+   //
+   //     Page<Bet> betPage = betRepository.findByUserId_EmailOrderByDescGroupByIsfinished(PageRequest.of(page-1,PAGE_SIZE),email);
+   //     List<BetDto> betDtoList = betPage.stream().toList().stream().map((element) -> modelMapper.map(element, BetDto.class)).toList();
+   //     int totalPage = betPage.getTotalPages();
+   //
+   //     BetPage result = new BetPage();
+   //     result.setTotalPages(totalPage);
+   //     result.setSeries(betDtoList);
+   //     return result;
+   //
+   // }
 
 
     
