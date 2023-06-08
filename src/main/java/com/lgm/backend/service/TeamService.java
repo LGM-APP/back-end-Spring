@@ -39,6 +39,7 @@ public class TeamService{
         List<TeamDto> teamsDto = teams.stream().map((element) -> modelMapper.map(element, TeamDto.class))
                 .toList();
 
+
         TeamPage result = new TeamPage();
         result.setTeams(teamsDto);
         result.setTotalPages(teamPage.getTotalPages());

@@ -11,7 +11,7 @@ public class BackGroundCheckBet {
 
     private final BetService betService;
 
-    @Scheduled(fixedDelay = 18000000)
+    @Scheduled(fixedDelay = 60000)
     public void run(){
         betService.checkBet();
     }

@@ -16,13 +16,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.dao.CannotAcquireLockException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
-import java.io.Console;
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 @Service
@@ -49,7 +46,7 @@ public class BetService {
         boolean betExist = betRepository.existsByMatchIdAndUserId_Email(match_id,email);
 
 
-        if ( userOptional.isEmpty()|| matchOptional.isEmpty()|| betExist){
+        if ( userOptional.isEmpty()|| matchOptional.isEmpty()|| betExist|| amount<0){
             return new Bet(null,null,null,null,null);
         }
 
@@ -64,14 +61,14 @@ public class BetService {
         }
 
         Float odd = idAway.equals(betTeam)?match.getAwayOdd():match.getHomeOdd();
-
-
         try {
             pointService.remove(amount, email);
             return betRepository.save(new Bet(user, match_id, betTeam, amount, odd));
         } catch (CannotAcquireLockException e) {
             return addBet(token, match_id, betTeam, amount);
         }
+
+
     }
 
     public List<Bet> getBetByEmail(String token){

@@ -4,10 +4,10 @@ import java.util.List;
 
 public interface IfavoriteService<T>{
 
-    public List<T> getAll(Integer userId,Integer elementId);
-    public T remove(Integer userId,Integer elementId);
-    public List<T> removeAll(Integer userId, List<Integer> elementsId);
-    public T add(Integer userId, Integer elementId);
-    public T addAll(Integer userId, List<Integer> elementsId);
+    public List<T> getAll(String token);
+    public Integer remove(String token,T elementId);
+    public Integer removeAll(String token, List<T> elementsId);
+    public T add(String token, T elementId);
+    public List<T> addAll(String token, List<T> elementsId);
 
 }
