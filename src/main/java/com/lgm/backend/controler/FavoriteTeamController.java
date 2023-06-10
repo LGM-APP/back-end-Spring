@@ -33,4 +33,10 @@ public class FavoriteTeamController {
         return new ResponseEntity<>(favoriteTeamService.removeAll(token,favoriteTeamDtoList), HttpStatus.ACCEPTED);
     }
 
+    @GetMapping("/get")
+    public List<FavoriteTeamDto> getAllFavorite(@NonNull HttpServletRequest request){
+        String token = jwtUtilities.getToken(request);
+        return favoriteTeamService.getAll(token);
+    }
+
 }

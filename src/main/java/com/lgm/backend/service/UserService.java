@@ -4,6 +4,7 @@ package com.lgm.backend.service;
 import com.lgm.backend.dto.BearerToken;
 import com.lgm.backend.dto.LoginDto;
 import com.lgm.backend.dto.RegisterDto;
+import com.lgm.backend.dto.UserDto;
 import com.lgm.backend.model.backendDb.Role;
 import com.lgm.backend.model.backendDb.RoleName;
 import com.lgm.backend.model.backendDb.User;
@@ -13,6 +14,7 @@ import com.lgm.backend.repository.backendDb.UserRepository;
 import com.lgm.backend.repository.mainDb.VideoGameRepository;
 import com.lgm.backend.security.JwtUtilities;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -93,6 +95,11 @@ public class UserService {
         String token = jwtUtilities.generateToken(user.getUsername(),rolesNames);
         return new BearerToken(token,"bearer");
     }
+
+    public List<User> getRanking(){
+        return userRepository.findAllOrderByPointDesc(PageRequest.of(0, 10)).toList();
+    }
+
 
 
 }

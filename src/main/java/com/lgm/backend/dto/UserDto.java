@@ -11,6 +11,8 @@ public class UserDto {
     String lastName ;
     String email;
     Integer point;
+    String description;
+    byte[] profilePhoto;
 
 
 }
