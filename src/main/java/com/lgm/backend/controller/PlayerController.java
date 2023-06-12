@@ -1,4 +1,4 @@
-package com.lgm.backend.controler;
+package com.lgm.backend.controller;
 
 import com.lgm.backend.dto.PlayerDto;
 import com.lgm.backend.service.PlayerService;

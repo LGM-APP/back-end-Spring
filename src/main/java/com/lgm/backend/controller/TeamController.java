@@ -1,9 +1,8 @@
-package com.lgm.backend.controler;
+package com.lgm.backend.controller;
 
 
 import com.lgm.backend.dto.TeamDto;
 import com.lgm.backend.dto.TeamPage;
-import com.lgm.backend.service.MatchService;
 import com.lgm.backend.service.TeamService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;

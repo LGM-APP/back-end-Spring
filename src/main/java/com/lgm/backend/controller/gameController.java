@@ -1,4 +1,4 @@
-package com.lgm.backend.controler;
+package com.lgm.backend.controller;
 
 import com.lgm.backend.security.JwtUtilities;
 import com.lgm.backend.service.PointService;

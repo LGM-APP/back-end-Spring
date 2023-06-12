@@ -1,10 +1,8 @@
-package com.lgm.backend.controler;
+package com.lgm.backend.controller;
 
 
 import com.lgm.backend.dto.MatchDto;
 import com.lgm.backend.dto.MatchPage;
-import com.lgm.backend.dto.SeriesDto;
-import com.lgm.backend.model.mainDb.Match;
 import com.lgm.backend.service.MatchService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;

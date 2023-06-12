@@ -1,9 +1,7 @@
-package com.lgm.backend.controler;
+package com.lgm.backend.controller;
 
 
-import com.lgm.backend.dto.SeriesDto;
 import com.lgm.backend.dto.TournamentDto;
-import com.lgm.backend.model.mainDb.Tournament;
 import com.lgm.backend.service.TournamentService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;

@@ -1,4 +1,4 @@
-package com.lgm.backend.controler;
+package com.lgm.backend.controller;
 
 import com.lgm.backend.dto.BetDto;
 import com.lgm.backend.dto.BetPage;
@@ -9,9 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/bet")

@@ -1,4 +1,4 @@
-package com.lgm.backend.controler;
+package com.lgm.backend.controller;
 
 import com.lgm.backend.dto.SeriePage;
 import com.lgm.backend.dto.SeriesDto;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/series")
 @RequiredArgsConstructor
-public class SeriesControler {
+public class SeriesController {
 
     @Autowired
     private ModelMapper modelMapper;

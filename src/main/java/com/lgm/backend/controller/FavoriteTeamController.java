@@ -1,8 +1,7 @@
-package com.lgm.backend.controler;
+package com.lgm.backend.controller;
 
 import com.lgm.backend.dto.FavoriteTeamDto;
 import com.lgm.backend.dto.TeamDto;
-import com.lgm.backend.model.backendDb.FavoriteTeam;
 import com.lgm.backend.security.JwtUtilities;
 import com.lgm.backend.service.favorite.FavoriteTeamService;
 import jakarta.servlet.http.HttpServletRequest;
