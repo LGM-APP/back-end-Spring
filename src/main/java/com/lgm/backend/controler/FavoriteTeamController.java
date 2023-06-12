@@ -1,6 +1,7 @@
 package com.lgm.backend.controler;
 
 import com.lgm.backend.dto.FavoriteTeamDto;
+import com.lgm.backend.dto.TeamDto;
 import com.lgm.backend.model.backendDb.FavoriteTeam;
 import com.lgm.backend.security.JwtUtilities;
 import com.lgm.backend.service.favorite.FavoriteTeamService;
@@ -28,13 +29,13 @@ public class FavoriteTeamController {
     }
 
     @PostMapping("/delete")
-    public ResponseEntity<Integer> removETeamToFavorite(@RequestBody List<FavoriteTeamDto> favoriteTeamDtoList, @NonNull HttpServletRequest request){
+    public ResponseEntity<Integer> removeTeamToFavorite(@RequestBody List<FavoriteTeamDto> favoriteTeamDtoList, @NonNull HttpServletRequest request){
         String token = jwtUtilities.getToken(request);
         return new ResponseEntity<>(favoriteTeamService.removeAll(token,favoriteTeamDtoList), HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/get")
-    public List<FavoriteTeamDto> getAllFavorite(@NonNull HttpServletRequest request){
+    public List<TeamDto> getAllFavorite(@NonNull HttpServletRequest request){
         String token = jwtUtilities.getToken(request);
         return favoriteTeamService.getAll(token);
     }

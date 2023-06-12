@@ -29,7 +29,7 @@ public class BetController {
                         @RequestParam(value = "amount") Float amount){
 
         String token = jwtUtilities.getToken(request);
-        return modelMapper.map(betService.addBet(token, match_id, betTeam, amount), BetDto.class);
+        return betService.addBet(token, match_id, betTeam, amount);
     }
 
     @GetMapping("/get/{page}")

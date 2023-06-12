@@ -1,10 +1,12 @@
 package com.lgm.backend.service.favorite;
 
 import com.lgm.backend.dto.FavoriteTeamDto;
+import com.lgm.backend.dto.TeamDto;
 import com.lgm.backend.model.backendDb.FavoriteTeam;
 import com.lgm.backend.model.backendDb.User;
 import com.lgm.backend.model.mainDb.Team;
 import com.lgm.backend.repository.backendDb.FavoriteTeamRepository;
+import com.lgm.backend.repository.mainDb.TeamRepository;
 import com.lgm.backend.security.JwtUtilities;
 import com.lgm.backend.service.TeamService;
 import com.lgm.backend.service.UserService;
@@ -21,25 +23,33 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class FavoriteTeamService implements IfavoriteService<FavoriteTeamDto>{
+public class FavoriteTeamService {
 
     private final FavoriteTeamRepository favoriteTeamRepository;
+    private final TeamRepository teamRepository;
     private final TeamService teamService;
     private final UserService userService;
     private final JwtUtilities jwtUtilities;
     private final ModelMapper modelMapper;
 
-    @Override
-    public List<FavoriteTeamDto> getAll(String token) {
+
+    public List<TeamDto> getAll(String token) {
 
         String email = jwtUtilities.extractUsername(token);
         Optional<User> userOptional = userService.getUser(email);
 
-        return userOptional.map(user -> favoriteTeamRepository.findByUserId_Id(user.getId()).stream().map((element) -> modelMapper.map(element, FavoriteTeamDto.class)).collect(Collectors.toList())).orElseGet(ArrayList::new);
+        User user = userOptional.get();
 
+        List<FavoriteTeam> favoriteTeamList = favoriteTeamRepository.findByUserId_Id(user.getId());
+        List<Team> teamDtoList = new ArrayList<>();
+
+        for (FavoriteTeam favoriteTeamDto:favoriteTeamList){
+            teamDtoList.add(teamRepository.findById(favoriteTeamDto.getIdTeam()).get());
+        }
+
+        return teamDtoList.stream().map((element) -> modelMapper.map(element, TeamDto.class)).collect(Collectors.toList());
     }
 
-    @Override
     public Integer remove(String token, FavoriteTeamDto elementId) {
 
         String email = jwtUtilities.extractUsername(token);
@@ -54,7 +64,6 @@ public class FavoriteTeamService implements IfavoriteService<FavoriteTeamDto>{
         return favoriteTeamRepository.deleteByUserIdAndIdTeam(user,elementId.getIdTeam());
     }
 
-    @Override
     public Integer removeAll(String token, List<FavoriteTeamDto> elementsId) {
 
         Integer totalDelete=0;
@@ -75,7 +84,6 @@ public class FavoriteTeamService implements IfavoriteService<FavoriteTeamDto>{
 
     }
 
-    @Override
     public FavoriteTeamDto add(String token, FavoriteTeamDto elementId) {
         String email = jwtUtilities.extractUsername(token);
 
@@ -100,7 +108,6 @@ public class FavoriteTeamService implements IfavoriteService<FavoriteTeamDto>{
         }
     }
 
-    @Override
     public List<FavoriteTeamDto> addAll(String token, List<FavoriteTeamDto> elementsId) {
 
         String email = jwtUtilities.extractUsername(token);

@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.Proxy;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
 import java.time.LocalDateTime;
@@ -21,6 +22,7 @@ import java.util.Date;
 @AllArgsConstructor
 @ToString
 @Entity
+@Proxy(lazy = false)
 @Table(name = "matchs")
 public class Match {
     @Id

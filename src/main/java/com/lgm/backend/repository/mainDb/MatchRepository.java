@@ -18,7 +18,8 @@ import java.util.List;
 public interface MatchRepository extends JpaRepository<Match, Integer> {
 
 
- List<Match> findAllByBeginAtAfterAndTournamentId(LocalDateTime beginAt, Integer tournament_id);
+ List<Match> findAllByTournament_Id(Integer tournament_id);
+
 
 
  Page<Match> findAllByAway_NameNotLikeAndHome_NameNotLikeAndStatusNotLikeAndBeginAtBetweenAndAwayNotNullAndHomeNotNullOrderByBeginAtAsc(String away_name, String home_name, String status, LocalDateTime beginAtStart, LocalDateTime beginAtEnd, Pageable pageable);

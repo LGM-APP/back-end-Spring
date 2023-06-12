@@ -30,7 +30,7 @@ public class MatchService {
     Integer PAGE_SIZE = 10;
 
     public List<Match> getMatchByTournamentId(Integer id){
-        return matchRepository.findAllByBeginAtAfterAndTournamentId(LocalDateTime.now(),id);
+        return matchRepository.findAllByTournament_Id(id);
     }
 
     public MatchPage getAllMatchDontBegin(Integer page){
